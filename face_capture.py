@@ -3,7 +3,7 @@ import os
 import cv2
 import imutils
 
-person_name = 'luis'
+person_name = input('Ingrese el nombre completo de la persona: ')
 
 data_path = os.path.join(os.getcwd(), 'data')
 person_path = os.path.join(data_path, person_name)
@@ -12,7 +12,8 @@ if not os.path.exists(person_path):
     os.mkdir(person_path)
     print('Carpeta creada: ', person_path)
 
-capture = cv2.VideoCapture('assets/videos/test-1.mp4')
+# capture = cv2.VideoCapture('assets/videos/test-2.mp4')
+capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 face_classifier = cv2.CascadeClassifier(
     cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 count = 0
@@ -39,7 +40,7 @@ while True:
     cv2.imshow('frame', frame)
 
     k = cv2.waitKey(1)
-    if k == 27 or count >= 300:
+    if k == 27 or count > 300:
         break
 
 capture.release()
